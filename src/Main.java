@@ -19,10 +19,29 @@ public class Main {
         return  (principalAmount)*((interestRate*(Math.pow(1+interestRate, payments)))/((Math.pow(1+interestRate, payments))-1));
     }
 
+    //method that does input validation to see if the user input was a number
+    static Object getADouble() throws NumberFormatException{
+        Scanner scanner = new Scanner(System.in);
+        boolean isNotDouble = true;
+        double variableDouble = 0; 
+
+        // input validation os created by use of while loop
+        while (true) {
+            try {
+                principalAmount = Double.parseDouble(scanner.next());
+                variableDouble = principalAmount; 
+                isNotDouble = false;
+                break;
+
+            } catch(NumberFormatException e) {
+                System.out.println("Please enter a number");
+            }
+        }
+        return variableDouble;
+    }
     public static void main(String[] args){
         double principalAmount, interestRate, period;
 
-        Scanner scanner = new Scanner(System.in);
         System.out.println("--------------------\n" +
                 "Welcome to the Mortgage Calculator. \n" +
                 "I will calculate your monthly mortgage payment based on your: \n" +
@@ -30,62 +49,17 @@ public class Main {
                 "--------------------\n" +
                 "Principal Amount($): ");
 
-        boolean principalIsDouble = true;
+        //have to cast because the method returns an object, not a double
+        principalAmount = (double) getADouble();
 
-        // input validation os created by use of while loop
-        while (true) {
-            try {
-                principalAmount = Double.parseDouble(scanner.next());
-                principalIsDouble = false;
-                break;
-
-            } catch(Exception e) {
-                System.out.println("Please enter a number for Principal Amount: ");
-            }
-            //if principal amount entered is double, boolean variable is changed to false. breaking the while loop
-            if (!principalIsDouble){
-                return;
-            }
-        }
-
+        //get interest rate with same method used previously
         System.out.println("Annual Interest Rate(%): ");
+        interestRate = (double) getADouble();
 
-        // input validation os created by use of while loop
-        boolean interestRateIsDouble = true;
-        while (true) {
-            try {
-                interestRate = Double.parseDouble(scanner.next());
-                interestRateIsDouble = false;
-                break;
-            } catch(Exception e) {
-                System.out.println("Please enter a number for Annual Interest Rate: ");
-            }
-
-            //if principal amount entered is double, boolean variable is changed to false. breaking the while loop
-            if (!interestRateIsDouble){
-                return;
-            }
-        }
-
+        //get period with same method used previously
         System.out.println("Period (Years):");
+        period = (double) getADouble();
 
-        // input validation os created by use of while loop
-        boolean periodIsDouble = true;
-        while (true) {
-            try {
-                period = Double.parseDouble(scanner.next());
-                interestRateIsDouble = false;
-                break;
-            } catch(Exception e) {
-                System.out.println("Please enter a number for Period: ");
-            }
-
-            //if principal amount entered is double, boolean variable is changed to false. breaking the while loop
-
-            if (!periodIsDouble){
-                return;
-            }
-        }
 
         double mortgage = getMortgage(principalAmount, interestRate, period);
 
