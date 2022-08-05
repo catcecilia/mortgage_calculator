@@ -20,7 +20,7 @@ public class Main {
     }
 
     //method that does input validation to see if the user input was a number
-    static Object getADouble() throws NumberFormatException{
+    static double getADouble() throws NumberFormatException{
         Scanner scanner = new Scanner(System.in);
         boolean isNotDouble = true;
         double variableDouble = 0; 
@@ -50,15 +50,15 @@ public class Main {
                 "Principal Amount($): ");
 
         //have to cast because the method returns an object, not a double
-        principalAmount = (double) getADouble();
+        principalAmount = getADouble();
 
         //get interest rate with same method used previously
         System.out.println("Annual Interest Rate(%): ");
-        interestRate = (double) getADouble();
+        interestRate = getADouble();
 
         //get period with same method used previously
         System.out.println("Period (Years):");
-        period = (double) getADouble();
+        period = getADouble();
 
 
         double mortgage = getMortgage(principalAmount, interestRate, period);
